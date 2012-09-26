@@ -1,0 +1,95 @@
+*AlphaComplete.txt*     Insert mode completion based on any sequence of alphabetic characters.
+
+		       ALPHA COMPLETE    by Ingo Karkat
+							   *AlphaComplete.vim*
+description			|AlphaComplete-description|
+usage				|AlphaComplete-usage|
+installation			|AlphaComplete-installation|
+configuration			|AlphaComplete-configuration|
+limitations			|AlphaComplete-limitations|
+known problems			|AlphaComplete-known-problems|
+todo				|AlphaComplete-todo|
+history				|AlphaComplete-history|
+
+==============================================================================
+DESCRIPTION					   *AlphaComplete-description*
+
+The built-in insert mode completion |i_CTRL-N| searches for keywords. When you
+want to complete from fragments of variables (e.g. "frobnicator" from
+"m_frobnicator"), it won't work. Same when you have a keyword prefix before
+your completion base (e.g. "_fro" won't find "frobnicator").
+This plugin offers completion of sequences of alphabetic characters ([A-Za-z],
+|/\a|), and therefore can complete from text fragments or when there are
+non-alphabetic keyword characters in front of the completion base.
+
+SEE ALSO								     *
+
+- Check out the |CompleteHelper.vim| plugin page (vimscript #3914) for a full
+  list of insert mode completions powered by it.
+
+==============================================================================
+USAGE							 *AlphaComplete-usage*
+
+In insert mode, invoke the alphabetic completion via CTRL-X a
+You can then search forward and backward via CTRL-N / CTRL-P, as usual.
+								  *i_CTRL-X_a*
+CTRL-X a		Find matches for whole fragments of alphabetic
+			characters.
+			Further use of CTRL-X a will copy the text including
+			the next alphabetic fragments following the previous
+			expansion in other contexts.
+
+==============================================================================
+INSTALLATION					  *AlphaComplete-installation*
+
+This script is packaged as a |vimball|. If you have the "gunzip" decompressor
+in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
+the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
+vimball or via the |:UseVimball| command. >
+    vim AlphaComplete*.vmb.gz
+    :so %
+To uninstall, use the |:RmVimball| command.
+
+DEPENDENCIES					  *AlphaComplete-dependencies*
+
+- Requires Vim 7.0 or higher.
+- Requires the |CompleteHelper.vim| plugin (vimscript #3914).
+
+==============================================================================
+CONFIGURATION					 *AlphaComplete-configuration*
+
+For a permanent configuration, put the following commands into your |vimrc|:
+
+			 *b:AlphaComplete_complete* *g:AlphaComplete_complete*
+Analoguous to the 'complete' option, you can specify which buffers will be
+scanned for completion candidates. Currently, '.' (current buffer), 'w'
+(buffers from other windows), and 'b' (other listed buffers) are supported. >
+    let g:AlphaComplete_complete string = '.,w,b'
+The global setting can be overridden for a particular buffer
+(b:AlphaComplete_complete).
+
+==============================================================================
+LIMITATIONS					   *AlphaComplete-limitations*
+
+KNOWN PROBLEMS					*AlphaComplete-known-problems*
+
+TODO							  *AlphaComplete-todo*
+
+IDEAS							 *AlphaComplete-ideas*
+
+==============================================================================
+HISTORY						       *AlphaComplete-history*
+
+GOAL
+First published version.
+
+0.01	12-Sep-2012
+Started development.
+
+==============================================================================
+Copyright: (C) 2012 Ingo Karkat
+The VIM LICENSE applies to this script; see |copyright|.
+
+Maintainer:	Ingo Karkat <ingo@karkat.de>
+==============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
