@@ -67,7 +67,12 @@ scanned for completion candidates. Currently, '.' (current buffer), 'w'
     let g:AlphaComplete_complete string = '.,w,b'
 The global setting can be overridden for a particular buffer
 (b:AlphaComplete_complete).
-
+							 *AlphaComplete-remap*
+If you want to use a different mapping, map your keys to the
+<Plug>(AlphaComplete) mapping target _before_ sourcing the script (e.g.
+in your |vimrc|): >
+    imap <C-x>a <Plug>(AlphaComplete)
+<
 ==============================================================================
 LIMITATIONS					   *AlphaComplete-limitations*
 
