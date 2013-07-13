@@ -2,6 +2,7 @@
 "
 " DEPENDENCIES:
 "   - CompleteHelper.vim autoload script
+"   - Complete/Repeat.vim autoload script
 "
 " Copyright: (C) 2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
@@ -15,7 +16,18 @@ function! s:GetCompleteOption()
     return (exists('b:AlphaComplete_complete') ? b:AlphaComplete_complete : g:AlphaComplete_complete)
 endfunction
 
+let s:repeatCnt = 0
 function! AlphaComplete#AlphaComplete( findstart, base )
+    if s:repeatCnt
+	if a:findstart
+	    return col('.') - 1
+	else
+	    let l:matches = []
+	    call CompleteHelper#FindMatches( l:matches, '\%(^\|\A\)\zs\V' . escape(s:fullText, '\') . '\zs\A\+\a\*', {'complete': s:GetCompleteOption()} )
+	    return l:matches
+	endif
+    endif
+
     if a:findstart
 	" Locate the start of the alphabetic characters.
 	let l:startCol = searchpos('\a*\%#', 'bn', line('.'))[1]
@@ -35,6 +47,10 @@ endfunction
 
 function! AlphaComplete#Expr()
     set completefunc=AlphaComplete#AlphaComplete
+
+    let s:repeatCnt = 0 " Important!
+    let [s:repeatCnt, l:addedText, s:fullText] = CompleteHelper#Repeat#TestForRepeat()
+
     return "\<C-x>\<C-u>"
 endfunction
 
