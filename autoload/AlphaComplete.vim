@@ -4,12 +4,13 @@
 "   - CompleteHelper.vim autoload script
 "   - Complete/Repeat.vim autoload script
 "
-" Copyright: (C) 2012 Ingo Karkat
+" Copyright: (C) 2012-2013 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"	002	14-Jul-2013	FIX: Remove duplicate \zs in repeat pattern.
 "	001	12-Sep-2012	file creation
 
 function! s:GetCompleteOption()
@@ -23,7 +24,7 @@ function! AlphaComplete#AlphaComplete( findstart, base )
 	    return col('.') - 1
 	else
 	    let l:matches = []
-	    call CompleteHelper#FindMatches( l:matches, '\%(^\|\A\)\zs\V' . escape(s:fullText, '\') . '\zs\A\+\a\*', {'complete': s:GetCompleteOption()} )
+	    call CompleteHelper#FindMatches(l:matches, '\V\%(\^\|\A\)' . escape(s:fullText, '\') . '\zs\A\+\a\*', {'complete': s:GetCompleteOption()})
 	    return l:matches
 	endif
     endif
@@ -40,7 +41,7 @@ function! AlphaComplete#AlphaComplete( findstart, base )
 	" characters. The match can start anywhere except after an alphabetic
 	" character.
 	let l:matches = []
-	call CompleteHelper#FindMatches( l:matches, '\%(^\|\A\)\zs\V' . escape(a:base, '\') . '\a\+', {'complete': s:GetCompleteOption()} )
+	call CompleteHelper#FindMatches(l:matches, '\V\%(\^\|\A\)\zs' . escape(a:base, '\') . '\a\+', {'complete': s:GetCompleteOption()})
 	return l:matches
     endif
 endfunction
