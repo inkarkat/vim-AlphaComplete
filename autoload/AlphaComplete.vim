@@ -4,13 +4,14 @@
 "   - CompleteHelper.vim autoload script
 "   - Complete/Repeat.vim autoload script
 "
-" Copyright: (C) 2012-2013 Ingo Karkat
+" Copyright: (C) 2012-2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
-"	002	14-Jul-2013	FIX: Remove duplicate \zs in repeat pattern.
+"   1.01.003	07-Apr-2014	Make repeat across lines work.
+"   1.00.002	14-Jul-2013	FIX: Remove duplicate \zs in repeat pattern.
 "	001	12-Sep-2012	file creation
 
 function! s:GetCompleteOption()
@@ -24,7 +25,10 @@ function! AlphaComplete#AlphaComplete( findstart, base )
 	    return col('.') - 1
 	else
 	    let l:matches = []
-	    call CompleteHelper#FindMatches(l:matches, '\V\%(\^\|\A\)' . escape(s:fullText, '\') . '\zs\A\+\a\*', {'complete': s:GetCompleteOption()})
+	    call CompleteHelper#FindMatches(l:matches, '\V\%(\^\|\_A\)' . substitute(escape(s:fullText, '\'), '\n', '\\n', 'g') . '\zs\_A\+\a\*', {'complete': s:GetCompleteOption(), 'processor': function('CompleteHelper#Repeat#Processor')})
+	    if empty(l:matches)
+		call CompleteHelper#Repeat#Clear()
+	    endif
 	    return l:matches
 	endif
     endif
