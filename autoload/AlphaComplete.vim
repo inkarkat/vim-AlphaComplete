@@ -17,6 +17,8 @@
 function! s:GetCompleteOption()
     return (exists('b:AlphaComplete_complete') ? b:AlphaComplete_complete : g:AlphaComplete_complete)
 endfunction
+let s:save_cpo = &cpo
+set cpo&vim
 
 let s:repeatCnt = 0
 function! AlphaComplete#AlphaComplete( findstart, base )
@@ -25,7 +27,14 @@ function! AlphaComplete#AlphaComplete( findstart, base )
 	    return col('.') - 1
 	else
 	    let l:matches = []
-	    call CompleteHelper#FindMatches(l:matches, '\V\%(\^\|\_A\)' . substitute(escape(s:fullText, '\'), '\n', '\\n', 'g') . '\zs\_A\+\a\*', {'complete': s:GetCompleteOption(), 'processor': function('CompleteHelper#Repeat#Processor')})
+
+	    " Need to translate the embedded ^@ newline into the \n atom.
+	    let l:previousCompleteExpr = substitute(escape(s:fullText, '\'), '\n', '\\n', 'g')
+
+	    call CompleteHelper#FindMatches(l:matches,
+	    \   '\V\%(\^\|\_A\)' . l:previousCompleteExpr . '\zs\_A\+\a\*',
+	    \   {'complete': s:GetCompleteOption(), 'processor': function('CompleteHelper#Repeat#Processor')}
+	    \)
 	    if empty(l:matches)
 		call CompleteHelper#Repeat#Clear()
 	    endif
@@ -59,4 +68,6 @@ function! AlphaComplete#Expr()
     return "\<C-x>\<C-u>"
 endfunction
 
+let &cpo = s:save_cpo
+unlet s:save_cpo
 " vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
