@@ -10,6 +10,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.01.004	08-Apr-2014	Adapt repeat pattern to match Vim's built-in
+"				behavior.
 "   1.01.003	07-Apr-2014	Make repeat across lines work.
 "   1.00.002	14-Jul-2013	FIX: Remove duplicate \zs in repeat pattern.
 "	001	12-Sep-2012	file creation
@@ -32,7 +34,7 @@ function! AlphaComplete#AlphaComplete( findstart, base )
 	    let l:previousCompleteExpr = substitute(escape(s:fullText, '\'), '\n', '\\n', 'g')
 
 	    call CompleteHelper#FindMatches(l:matches,
-	    \   '\V\%(\^\|\_A\)' . l:previousCompleteExpr . '\zs\_A\+\a\*',
+	    \   '\V\%(\^\|\_A\)' . l:previousCompleteExpr . '\zs\%(\A\+\a\+\|\_s\+\A\*\a\+\|\_s\*\A\+\)',
 	    \   {'complete': s:GetCompleteOption(), 'processor': function('CompleteHelper#Repeat#Processor')}
 	    \)
 	    if empty(l:matches)
