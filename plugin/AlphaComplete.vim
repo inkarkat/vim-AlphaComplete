@@ -4,13 +4,13 @@
 "   - Requires Vim 7.0 or higher.
 "   - AlphaComplete.vim autoload script
 "
-" Copyright: (C) 2012 Ingo Karkat
+" Copyright: (C) 2012-2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
-"	001	12-Sep-2012	file creation
+"   1.00.001	12-Sep-2012	file creation
 
 " Avoid installing twice or when in unsupported Vim version.
 if exists('g:loaded_AlphaComplete') || (v:version < 700)
