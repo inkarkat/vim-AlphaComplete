@@ -10,6 +10,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.01.005	09-Apr-2014	Let CompleteHelper#Repeat#GetPattern() assemble
+"				the repeat pattern.
 "   1.01.004	08-Apr-2014	Adapt repeat pattern to match Vim's built-in
 "				behavior.
 "   1.01.003	07-Apr-2014	Make repeat across lines work.
@@ -29,12 +31,8 @@ function! AlphaComplete#AlphaComplete( findstart, base )
 	    return col('.') - 1
 	else
 	    let l:matches = []
-
-	    " Need to translate the embedded ^@ newline into the \n atom.
-	    let l:previousCompleteExpr = substitute(escape(s:fullText, '\'), '\n', '\\n', 'g')
-
 	    call CompleteHelper#FindMatches(l:matches,
-	    \   '\V\%(\^\|\_A\)' . l:previousCompleteExpr . '\zs\%(\A\+\a\+\|\_s\+\A\*\a\+\|\_s\*\A\+\)',
+	    \   CompleteHelper#Repeat#GetPattern(s:fullText, '\%(\^\|\A\)', '\a', '\A'),
 	    \   {'complete': s:GetCompleteOption(), 'processor': function('CompleteHelper#Repeat#Processor')}
 	    \)
 	    if empty(l:matches)
