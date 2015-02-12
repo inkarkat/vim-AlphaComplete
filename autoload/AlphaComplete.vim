@@ -3,13 +3,17 @@
 " DEPENDENCIES:
 "   - CompleteHelper.vim autoload script
 "   - Complete/Repeat.vim autoload script
+"   - ingo/plugin/setting.vim autoload script
 "
-" Copyright: (C) 2012-2014 Ingo Karkat
+" Copyright: (C) 2012-2015 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.01.006	12-Jan-2015	Remove default g:AlphaComplete_complete
+"				configuration and default to 'complete' option
+"				value instead.
 "   1.01.005	09-Apr-2014	Let CompleteHelper#Repeat#GetPattern() assemble
 "				the repeat pattern.
 "   1.01.004	08-Apr-2014	Adapt repeat pattern to match Vim's built-in
@@ -19,7 +23,7 @@
 "	001	12-Sep-2012	file creation
 
 function! s:GetCompleteOption()
-    return (exists('b:AlphaComplete_complete') ? b:AlphaComplete_complete : g:AlphaComplete_complete)
+    return ingo#plugin#setting#GetBufferLocal('AlphaComplete_complete', &complete)
 endfunction
 let s:save_cpo = &cpo
 set cpo&vim
