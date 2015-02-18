@@ -14,6 +14,7 @@ call InsertRepeat('my:Find', 1, 0)
 call InsertRepeat('scr', 0, 2)
 
 call InsertRepeat('nothing_witho', 0, 0, 0, 0)
+call InsertRepeat('nothing_witho', 0, 0, 0, 0, 2)
 
 call vimtest#SaveOut()
 call vimtest#Quit()
