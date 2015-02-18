@@ -7,7 +7,9 @@ new
 call SetCompletion("\<C-x>a")
 
 call InsertRepeat('my:opt', 1, 0, 0, 0, 0, 0)
-call InsertRepeat('my:opt', 2, 0, 0, 0, 0, 0)
+call InsertRepeat('my:opt', 2, 0)
+call InsertRepeat('my:opt', 1, 0, 2)
+call InsertRepeat('my:opt', 1, 2, 1, 0, 0, 0, 0)
 
 call vimtest#SaveOut()
 call vimtest#Quit()
