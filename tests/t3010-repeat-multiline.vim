@@ -5,6 +5,7 @@ view AlphaComplete.txt
 new
 
 call SetCompletion("\<C-x>a")
+call SetCompleteExpr('AlphaComplete#Expr')
 
 call InsertRepeat('my:opt', 1, 0, 0, 0, 0, 0)
 call InsertRepeat('my:opt', 2, 0)
