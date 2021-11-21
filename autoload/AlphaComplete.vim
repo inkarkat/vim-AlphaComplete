@@ -21,12 +21,12 @@
 "   1.01.003	07-Apr-2014	Make repeat across lines work.
 "   1.00.002	14-Jul-2013	FIX: Remove duplicate \zs in repeat pattern.
 "	001	12-Sep-2012	file creation
+let s:save_cpo = &cpo
+set cpo&vim
 
 function! s:GetCompleteOption()
     return ingo#plugin#setting#GetBufferLocal('AlphaComplete_complete', &complete)
 endfunction
-let s:save_cpo = &cpo
-set cpo&vim
 
 let s:repeatCnt = 0
 function! AlphaComplete#AlphaComplete( findstart, base )
