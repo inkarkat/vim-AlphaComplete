@@ -1,6 +1,6 @@
 " Test repeat of alpha completion across lines.
 
-source ../helpers/insert.vim
+runtime tests/helpers/insert.vim
 view AlphaComplete.txt
 new
 
