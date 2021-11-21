@@ -1,3 +1,5 @@
 my:option m_frobnicator and m_frazzler
-my:options) call global:FindMatchesInOtherWindows(any-match
+my:options)
+my:options) " call
+my:options) " call global:FindMatchesInOtherWindows(any-match
 
