@@ -53,6 +53,8 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES					  *AlphaComplete-dependencies*
 
 - Requires Vim 7.0 or higher.
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.010 or
+  higher.
 - Requires the |CompleteHelper.vim| plugin (vimscript #3914), version 1.40 or
   higher.
 
@@ -62,12 +64,12 @@ CONFIGURATION					 *AlphaComplete-configuration*
 For a permanent configuration, put the following commands into your |vimrc|:
 
 			 *b:AlphaComplete_complete* *g:AlphaComplete_complete*
-Analoguous to the 'complete' option, you can specify which buffers will be
-scanned for completion candidates. Currently, '.' (current buffer), 'w'
-(buffers from other windows), and 'b' (other listed buffers) are supported. >
-    let g:AlphaComplete_complete = '.,w,b'
-The global setting can be overridden for a particular buffer
-(b:AlphaComplete_complete).
+By default, the 'complete' option controls which buffers will be scanned for
+completion candidates. You can override that either for the entire plugin, or
+only for particular buffers; see |CompleteHelper_complete| for supported
+values. >
+    let g:AlphaComplete_complete = '.,w,b,u'
+<
 							 *AlphaComplete-remap*
 If you want to use a different mapping, map your keys to the
 <Plug>(AlphaComplete) mapping target _before_ sourcing the script (e.g.
@@ -89,6 +91,8 @@ HISTORY						       *AlphaComplete-history*
 1.01	RELEASEME
 - Make repeat across lines work. *** You need to update to CompleteHelper.vim
   (vimscript #3914) version 1.40! ***
+- Remove default g:AlphaComplete_complete configuration and default to
+  'complete' option value instead.
 
 1.00	04-Apr-2014
 First published version.
@@ -97,7 +101,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2012-2014 Ingo Karkat
+Copyright: (C) 2012-2015 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
