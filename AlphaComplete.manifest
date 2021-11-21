@@ -1,0 +1,3 @@
+autoload/AlphaComplete.vim
+plugin/AlphaComplete.vim
+doc/AlphaComplete.txt
