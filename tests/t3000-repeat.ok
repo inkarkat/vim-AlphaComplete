@@ -3,5 +3,6 @@ my:FindMatchesInOtherWindows(any-match-here
 my:FindMatchesInOtherWindows(any-match
 my:FindMatchesInOtherWindows(any
 script_31337_path
+nothing_without_extension_11=%~dpn0
 nothing_without_extension_11=%~dpn0 " prefixed
 
