@@ -1,10 +1,11 @@
 " Test repeat of alpha completion.
 
-source ../helpers/insert.vim
+runtime tests/helpers/insert.vim
 view AlphaComplete.txt
 new
 
 call SetCompletion("\<C-x>a")
+call SetCompleteExpr('AlphaComplete#Expr')
 
 call InsertRepeat('my:Find', 1, 0, 0, 0, 0)
 call InsertRepeat('my:Find', 1, 0, 0, 0)
