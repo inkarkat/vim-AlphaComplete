@@ -2,5 +2,5 @@
 "	set my_script_31337_path_and_name_without_extension_11=%~dpn0
 " prefixed_this_crazy_name or prefixed_underscore_code_name, but not underscore_code_negative neither prefixed_bad_code_name.
 call script:FindMatchesInCurrentWindow(some-matches-here, some-patterns(), some-options)
-call global:FindMatchesInOtherWindows(any-match-here, any-pattern(), any-option
+" call global:FindMatchesInOtherWindows(any-match-here, any-pattern(), any-option
 m_frobnicator and m_frazzler
